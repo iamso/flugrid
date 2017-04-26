@@ -1,0 +1,17 @@
+{
+  "name": "flugrid",
+  "repository": "iamso/flugrid",
+  "description": "simple fluid grid",
+  "version": "0.1.0",
+  "keywords": [
+    "fluid",
+    "grid"
+  ],
+  "scripts": [
+    "dist/flugrid.js",
+    "dist/flugrid.min.js",
+    "dist/flugrid.next.js",
+    "dist/flugrid.next.min.js"
+  ],
+  "license": "MIT"
+}

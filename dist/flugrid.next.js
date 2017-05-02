@@ -1,5 +1,5 @@
 /*!
- * flugrid - version 0.1.0
+ * flugrid - version 0.1.1
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
@@ -58,7 +58,7 @@ export default class Flugrid {
     rtl = this.rtl
   } = {}) {
     this.container = container instanceof Node ? container : document.querySelector(container);
-    this.items = items instanceof NodeList ? items : this.container.querySelectorAll(items);
+    this.items = this.container ? [].slice.call(items instanceof NodeList ? items : this.container.querySelectorAll(items), 0) : [];
     this.gutter = isFinite(parseInt(gutter)) ? parseInt(gutter) : 0;
     this.rtl = !!rtl;
   }
@@ -69,49 +69,50 @@ export default class Flugrid {
    */
   build() {
     return new Promise((resolve, reject) => {
-      this.container.style.width = '';
+      if (this.container && this.items.length) {
+        this.container.style.width = '';
 
-      const containerWidth = this.container.getBoundingClientRect().width;
-      const itemWidth = this.items[0].getBoundingClientRect().width + this.gutter;
-      const cols = Math.max(Math.floor((containerWidth - this.gutter) / itemWidth), 1);
-      const itemsGutter = [];
-      const itemsX = [];
+        const containerWidth = this.container.getBoundingClientRect().width;
+        const itemWidth = this.items[0].getBoundingClientRect().width + this.gutter;
+        const cols = Math.max(Math.floor((containerWidth - this.gutter) / itemWidth), 1);
+        const itemsGutter = [];
+        const itemsX = [];
 
-      this.container.style.width = `${ itemWidth * cols + this.gutter }px`;;
-      this.container.style.position = 'relative';
+        this.container.style.width = `${ itemWidth * cols + this.gutter }px`;;
+        this.container.style.position = 'relative';
 
-      for (let i of Array(cols).keys()) {
-        itemsX.push(i * itemWidth + this.gutter);
-        itemsGutter.push(this.gutter);
-      }
+        for (let i of Array(cols).keys()) {
+          itemsX.push(i * itemWidth + this.gutter);
+          itemsGutter.push(this.gutter);
+        }
 
-      if (this.rtl) {
-        itemsX.reverse();
-      }
+        if (this.rtl) {
+          itemsX.reverse();
+        }
 
-      for (let item of this.items) {
-        let itemIndex = itemsGutter.slice(0).sort(function (a, b) {
+        for (let item of this.items) {
+          let itemIndex = itemsGutter.slice(0).sort(function (a, b) {
+            return a - b;
+          }).shift();
+          itemIndex = itemsGutter.indexOf(itemIndex);
+
+          const posX = parseInt(itemsX[itemIndex]);
+          const posY = parseInt(itemsGutter[itemIndex]);
+
+          item.style.position = 'absolute';
+          item.style.webkitBackfaceVisibility = item.style.backfaceVisibility = 'hidden';
+          item.style.transformStyle = 'preserve-3d';
+          item.style.transform = `translate3D(${ posX }px, ${ posY }px, 0)`;
+
+          itemsGutter[itemIndex] += item.getBoundingClientRect().height + this.gutter;
+        }
+
+        const containerHeight = itemsGutter.slice(0).sort(function (a, b) {
           return a - b;
-        }).shift();
-        itemIndex = itemsGutter.indexOf(itemIndex);
+        }).pop();
 
-        const posX = parseInt(itemsX[itemIndex]);
-        const posY = parseInt(itemsGutter[itemIndex]);
-
-        item.style.position = 'absolute';
-        item.style.webkitBackfaceVisibility = item.style.backfaceVisibility = 'hidden';
-        item.style.transformStyle = 'preserve-3d';
-        item.style.transform = `translate3D(${ posX }px, ${ posY }px, 0)`;
-
-        itemsGutter[itemIndex] += item.getBoundingClientRect().height + this.gutter;
+        this.container.style.height = `${ containerHeight }px`;
       }
-
-      const containerHeight = itemsGutter.slice(0).sort(function (a, b) {
-        return a - b;
-      }).pop();
-
-      this.container.style.height = `${ containerHeight }px`;
-
       resolve(this);
     });
   }

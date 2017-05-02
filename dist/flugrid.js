@@ -1,5 +1,5 @@
 /*!
- * flugrid - version 0.1.0
+ * flugrid - version 0.1.1
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
@@ -115,7 +115,7 @@
         var rtl = _ref2$rtl === undefined ? this.rtl : _ref2$rtl;
 
         this.container = container instanceof Node ? container : document.querySelector(container);
-        this.items = items instanceof NodeList ? items : this.container.querySelectorAll(items);
+        this.items = this.container ? [].slice.call(items instanceof NodeList ? items : this.container.querySelectorAll(items), 0) : [];
         this.gutter = isFinite(parseInt(gutter)) ? parseInt(gutter) : 0;
         this.rtl = !!rtl;
       }
@@ -125,91 +125,92 @@
         var _this = this;
 
         return new Promise(function (resolve, reject) {
-          _this.container.style.width = '';
+          if (_this.container && _this.items.length) {
+            _this.container.style.width = '';
 
-          var containerWidth = _this.container.getBoundingClientRect().width;
-          var itemWidth = _this.items[0].getBoundingClientRect().width + _this.gutter;
-          var cols = Math.max(Math.floor((containerWidth - _this.gutter) / itemWidth), 1);
-          var itemsGutter = [];
-          var itemsX = [];
+            var containerWidth = _this.container.getBoundingClientRect().width;
+            var itemWidth = _this.items[0].getBoundingClientRect().width + _this.gutter;
+            var cols = Math.max(Math.floor((containerWidth - _this.gutter) / itemWidth), 1);
+            var itemsGutter = [];
+            var itemsX = [];
 
-          _this.container.style.width = itemWidth * cols + _this.gutter + 'px';;
-          _this.container.style.position = 'relative';
+            _this.container.style.width = itemWidth * cols + _this.gutter + 'px';;
+            _this.container.style.position = 'relative';
 
-          var _iteratorNormalCompletion = true;
-          var _didIteratorError = false;
-          var _iteratorError = undefined;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
-          try {
-            for (var _iterator = Array(cols).keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-              var i = _step.value;
-
-              itemsX.push(i * itemWidth + _this.gutter);
-              itemsGutter.push(_this.gutter);
-            }
-          } catch (err) {
-            _didIteratorError = true;
-            _iteratorError = err;
-          } finally {
             try {
-              if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
+              for (var _iterator = Array(cols).keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var i = _step.value;
+
+                itemsX.push(i * itemWidth + _this.gutter);
+                itemsGutter.push(_this.gutter);
               }
+            } catch (err) {
+              _didIteratorError = true;
+              _iteratorError = err;
             } finally {
-              if (_didIteratorError) {
-                throw _iteratorError;
+              try {
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                  _iterator.return();
+                }
+              } finally {
+                if (_didIteratorError) {
+                  throw _iteratorError;
+                }
               }
             }
-          }
 
-          if (_this.rtl) {
-            itemsX.reverse();
-          }
-
-          var _iteratorNormalCompletion2 = true;
-          var _didIteratorError2 = false;
-          var _iteratorError2 = undefined;
-
-          try {
-            for (var _iterator2 = _this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-              var item = _step2.value;
-
-              var itemIndex = itemsGutter.slice(0).sort(function (a, b) {
-                return a - b;
-              }).shift();
-              itemIndex = itemsGutter.indexOf(itemIndex);
-
-              var posX = parseInt(itemsX[itemIndex]);
-              var posY = parseInt(itemsGutter[itemIndex]);
-
-              item.style.position = 'absolute';
-              item.style.webkitBackfaceVisibility = item.style.backfaceVisibility = 'hidden';
-              item.style.transformStyle = 'preserve-3d';
-              item.style.transform = 'translate3D(' + posX + 'px, ' + posY + 'px, 0)';
-
-              itemsGutter[itemIndex] += item.getBoundingClientRect().height + _this.gutter;
+            if (_this.rtl) {
+              itemsX.reverse();
             }
-          } catch (err) {
-            _didIteratorError2 = true;
-            _iteratorError2 = err;
-          } finally {
+
+            var _iteratorNormalCompletion2 = true;
+            var _didIteratorError2 = false;
+            var _iteratorError2 = undefined;
+
             try {
-              if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                _iterator2.return();
+              for (var _iterator2 = _this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+                var item = _step2.value;
+
+                var itemIndex = itemsGutter.slice(0).sort(function (a, b) {
+                  return a - b;
+                }).shift();
+                itemIndex = itemsGutter.indexOf(itemIndex);
+
+                var posX = parseInt(itemsX[itemIndex]);
+                var posY = parseInt(itemsGutter[itemIndex]);
+
+                item.style.position = 'absolute';
+                item.style.webkitBackfaceVisibility = item.style.backfaceVisibility = 'hidden';
+                item.style.transformStyle = 'preserve-3d';
+                item.style.transform = 'translate3D(' + posX + 'px, ' + posY + 'px, 0)';
+
+                itemsGutter[itemIndex] += item.getBoundingClientRect().height + _this.gutter;
               }
+            } catch (err) {
+              _didIteratorError2 = true;
+              _iteratorError2 = err;
             } finally {
-              if (_didIteratorError2) {
-                throw _iteratorError2;
+              try {
+                if (!_iteratorNormalCompletion2 && _iterator2.return) {
+                  _iterator2.return();
+                }
+              } finally {
+                if (_didIteratorError2) {
+                  throw _iteratorError2;
+                }
               }
             }
+
+            var containerHeight = itemsGutter.slice(0).sort(function (a, b) {
+              return a - b;
+            }).pop();
+
+            _this.container.style.height = containerHeight + 'px';
           }
-
-          var containerHeight = itemsGutter.slice(0).sort(function (a, b) {
-            return a - b;
-          }).pop();
-
-          _this.container.style.height = containerHeight + 'px';
-
           resolve(_this);
         });
       }

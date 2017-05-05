@@ -73,7 +73,7 @@ export default class Flugrid {
         this.container.style.width = `${itemWidth * cols + this.gutter}px`;;
         this.container.style.position = 'relative';
 
-        for (let i of Array(cols).keys()) {
+        for (let i = 0; i < cols; i++) {
           itemsX.push(i * itemWidth + this.gutter);
           itemsGutter.push(this.gutter);
         }

@@ -1,5 +1,5 @@
 /*!
- * flugrid - version 0.1.1
+ * flugrid - version 0.1.2
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
@@ -137,43 +137,22 @@
             _this.container.style.width = itemWidth * cols + _this.gutter + 'px';;
             _this.container.style.position = 'relative';
 
-            var _iteratorNormalCompletion = true;
-            var _didIteratorError = false;
-            var _iteratorError = undefined;
-
-            try {
-              for (var _iterator = Array(cols).keys()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-                var i = _step.value;
-
-                itemsX.push(i * itemWidth + _this.gutter);
-                itemsGutter.push(_this.gutter);
-              }
-            } catch (err) {
-              _didIteratorError = true;
-              _iteratorError = err;
-            } finally {
-              try {
-                if (!_iteratorNormalCompletion && _iterator.return) {
-                  _iterator.return();
-                }
-              } finally {
-                if (_didIteratorError) {
-                  throw _iteratorError;
-                }
-              }
+            for (var i = 0; i < cols; i++) {
+              itemsX.push(i * itemWidth + _this.gutter);
+              itemsGutter.push(_this.gutter);
             }
 
             if (_this.rtl) {
               itemsX.reverse();
             }
 
-            var _iteratorNormalCompletion2 = true;
-            var _didIteratorError2 = false;
-            var _iteratorError2 = undefined;
+            var _iteratorNormalCompletion = true;
+            var _didIteratorError = false;
+            var _iteratorError = undefined;
 
             try {
-              for (var _iterator2 = _this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-                var item = _step2.value;
+              for (var _iterator = _this.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+                var item = _step.value;
 
                 var itemIndex = itemsGutter.slice(0).sort(function (a, b) {
                   return a - b;
@@ -191,16 +170,16 @@
                 itemsGutter[itemIndex] += item.getBoundingClientRect().height + _this.gutter;
               }
             } catch (err) {
-              _didIteratorError2 = true;
-              _iteratorError2 = err;
+              _didIteratorError = true;
+              _iteratorError = err;
             } finally {
               try {
-                if (!_iteratorNormalCompletion2 && _iterator2.return) {
-                  _iterator2.return();
+                if (!_iteratorNormalCompletion && _iterator.return) {
+                  _iterator.return();
                 }
               } finally {
-                if (_didIteratorError2) {
-                  throw _iteratorError2;
+                if (_didIteratorError) {
+                  throw _iteratorError;
                 }
               }
             }
@@ -220,13 +199,13 @@
         this.container.style.position = '';
         this.container.style.width = '';
         this.container.style.height = '';
-        var _iteratorNormalCompletion3 = true;
-        var _didIteratorError3 = false;
-        var _iteratorError3 = undefined;
+        var _iteratorNormalCompletion2 = true;
+        var _didIteratorError2 = false;
+        var _iteratorError2 = undefined;
 
         try {
-          for (var _iterator3 = this.items[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-            var item = _step3.value;
+          for (var _iterator2 = this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+            var item = _step2.value;
 
             item.style.position = '';
             item.style.webkitBackfaceVisibility = item.style.backfaceVisibility = '';
@@ -234,16 +213,16 @@
             item.style.transform = '';
           }
         } catch (err) {
-          _didIteratorError3 = true;
-          _iteratorError3 = err;
+          _didIteratorError2 = true;
+          _iteratorError2 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion3 && _iterator3.return) {
-              _iterator3.return();
+            if (!_iteratorNormalCompletion2 && _iterator2.return) {
+              _iterator2.return();
             }
           } finally {
-            if (_didIteratorError3) {
-              throw _iteratorError3;
+            if (_didIteratorError2) {
+              throw _iteratorError2;
             }
           }
         }

@@ -1,9 +1,9 @@
 /*!
- * flugrid - version 0.1.3
+ * flugrid - version 0.1.4
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
- * Copyright (c) 2017 Steve Ottoz
+ * Copyright (c) 2018 Steve Ottoz
  */
 (function (global, factory) {
   if (typeof define === "function" && define.amd) {
@@ -130,7 +130,7 @@
 
             var containerWidth = _this.container.getBoundingClientRect().width;
             var itemWidth = _this.items[0].getBoundingClientRect().width + _this.gutter;
-            var cols = Math.max(Math.floor((containerWidth - _this.gutter) / itemWidth), 1);
+            var cols = Math.max(Math.floor((containerWidth - _this.gutter) / Math.floor(itemWidth)), 1);
             var itemsGutter = [];
             var itemsX = [];
 

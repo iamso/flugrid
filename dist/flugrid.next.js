@@ -1,9 +1,9 @@
 /*!
- * flugrid - version 0.1.3
+ * flugrid - version 0.1.4
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
- * Copyright (c) 2017 Steve Ottoz
+ * Copyright (c) 2018 Steve Ottoz
  */
 'use strict';
 
@@ -74,7 +74,7 @@ export default class Flugrid {
 
         const containerWidth = this.container.getBoundingClientRect().width;
         const itemWidth = this.items[0].getBoundingClientRect().width + this.gutter;
-        const cols = Math.max(Math.floor((containerWidth - this.gutter) / itemWidth), 1);
+        const cols = Math.max(Math.floor((containerWidth - this.gutter) / Math.floor(itemWidth)), 1);
         const itemsGutter = [];
         const itemsX = [];
 

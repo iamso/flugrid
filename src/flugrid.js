@@ -66,7 +66,7 @@ export default class Flugrid {
 
         const containerWidth = this.container.getBoundingClientRect().width;
         const itemWidth = this.items[0].getBoundingClientRect().width + this.gutter;
-        const cols = Math.max(Math.floor((containerWidth - this.gutter) / itemWidth), 1);
+        const cols = Math.max(Math.floor((containerWidth - this.gutter) / Math.floor(itemWidth)), 1);
         const itemsGutter = [];
         const itemsX = [];
 

@@ -38,7 +38,7 @@ window.addEventListener('resize', e => {
 // create an instance passing options (defaults)
 const flugrid = new Flugrid({
   container: '.flugrid', // the selector or dom element for the container
-  items: '.flugrid-item', // the selector or dom elements for the items
+  items: '.flugrid__item', // the selector or dom elements for the items
   gutter: 0, // the gutter between the items
   auto: false, // automatically rebuild on resize
   rtl: false // right-to-left order
@@ -50,15 +50,15 @@ You can use it with Flexboxgrid, Bootstrap grid or whatever you prefer, as long 
 ```html
 <div class="container">
   <div class="row flugrid">
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">1</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">2</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">3</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">4</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">5</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">6</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">7</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">8</div>
-    <div class="col-xs-12 col-sm-6 col-md-4 flugrid-item">9</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">1</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">2</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">3</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">4</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">5</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">6</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">7</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">8</div>
+    <div class="col-xs-12 col-sm-6 col-md-4 flugrid__item">9</div>
   </div>
 </div>
 ```

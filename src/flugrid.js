@@ -12,7 +12,7 @@ export default class Flugrid {
    */
   constructor({
     container = '.flugrid', // the selector or dom element for the container
-    items = '.flugrid-item', // the selector or dom elements for the items
+    items = '.flugrid__item', // the selector or dom elements for the items
     gutter = 0, // the gutter between the items
     auto = false, // automatically rebuild on resize
     rtl = false // right-to-left order
@@ -70,7 +70,7 @@ export default class Flugrid {
         const itemsGutter = [];
         const itemsX = [];
 
-        this.container.style.width = `${itemWidth * cols + this.gutter}px`;;
+        this.container.style.width = `${itemWidth * cols + this.gutter}px`;
         this.container.style.position = 'relative';
 
         for (let i = 0; i < cols; i++) {

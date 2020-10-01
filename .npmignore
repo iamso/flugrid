@@ -1,4 +1,4 @@
-_resources
+.DS_Store
 demo
-gulpfile.js
+rollup.config.js
 src

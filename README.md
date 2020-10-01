@@ -5,14 +5,6 @@ simple fluid grid
 Install
 -------
 
-### With Bower
-
-```bash
-bower install flugrid
-```
-
-### With NPM
-
 ```bash
 npm install flugrid
 ```

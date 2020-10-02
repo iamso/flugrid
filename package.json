@@ -1,6 +1,6 @@
 {
   "name": "flugrid",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "simple fluid grid",
   "main": "dist/flugrid.cjs.js",
   "module": "dist/flugrid.esm.js",

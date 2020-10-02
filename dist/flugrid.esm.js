@@ -1,5 +1,5 @@
 /*!
- * flugrid - version 0.2.0
+ * flugrid - version 0.3.0
  *
  * Made with ❤ by Steve Ottoz so@dev.so
  *
